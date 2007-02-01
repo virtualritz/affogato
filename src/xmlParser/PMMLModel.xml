@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<PMML version="3.0"
+  xmlns="http://www.dmg.org/PMML-3-0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema_instance" >
+  <Header copyright="VADIS">
+     Hello World!
+     <Application name="RANK For &lt;you>" version="1.99beta" />
+  </Header>
+  <Extension extender="RANKF" name="keys"><Key name="urn"></Key></Extension>
+<DataDictionary>
+  <DataField name="persfam" optype="continuous" dataType="double">
+     <Extension extender="RANKF" name="isAge" value="0" />
+    <Value value="9.900000e+001" property="missing" />
+  </DataField>
+  <DataField name="prov" optype="categorical" dataType="double" />
+  <DataField name="urb" optype="categorical" dataType="double" />
+  <DataField name="ses" optype="categorical" dataType="double" />
+</DataDictionary>
+<RegressionModel functionName="regression" modelType="linearRegression">
+  <RegressionTable intercept="0.00796037">
+    <NumericPredictor name="persfam" coefficient="-0.00275951" />
+    <NumericPredictor name="prov" coefficient="0.000319433" />
+    <NumericPredictor name="ses" coefficient="-0.000454307" />
+  </RegressionTable>
+</RegressionModel>
+</PMML>

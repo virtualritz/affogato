@@ -1,0 +1,3 @@
+imager unmultiply() {
+	Ci /=  Oi;
+}
