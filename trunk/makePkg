@@ -1,0 +1,1 @@
+tar cvjf ../affogato-0.84.2.tbz2 src/*.cpp src/affogato.version src/xmlParser/xmlParser.cpp src/xmlParser/xmlParser.h  include/*.h scripts/*.py python/*.py shaders/src/*.sl W32Installer/*.iss W32Installer/*.bmp Makefile ChangeLog CHANGES.txt affogato.suo affogato.vcproj
