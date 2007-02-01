@@ -1,0 +1,50 @@
+0.83 --------------------------------------------------------------------------
+2006-01-10 moritzm
+  - Opacity threshold works
+  - Focus factor added
+
+2006-01-17 mattd
+  - Support for dumping XML depedencies added
+
+
+0.82 --------------------------------------------------------------------------
+2005-12-20 moritzm
+  - Looks introduced
+  - Uncommented pixel filter code in RiRenderer class
+
+
+0.68 --------------------------------------------------------------------------
+
+2005-07-13 moritzm
+  - Added NURB support
+
+
+0.60 --------------------------------------------------------------------------
+
+2005-06-07 moritzm
+  - Added initial Hype lens overscan support
+
+
+0.59 --------------------------------------------------------------------------
+
+2005-06-07 moritzm
+  - Added support for recursive attribute scanning
+  - Modified curves output to support closed and linear curves
+
+2005-06-06 moritzm
+  - Added support for curve output
+
+
+0.20 --------------------------------------------------------------------------
+
+2005-04-04 moritzm
+  - Added preliminary support for XSI lightsource output
+  - Added API support for shader output
+
+2005-03-30 moritzm
+  - Added preliminary support for arbitrary per-object multi-segment motion blur
+
+
+0.10 --------------------------------------------------------------------------
+
+Initial release
