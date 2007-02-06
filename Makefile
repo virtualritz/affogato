@@ -60,7 +60,7 @@ DEFINES := \
 	-DDELIGHT \
 	-D__XSI_PLUGIN \
 	-DRSP \
-	-DDEBUG
+	-DNDEBUG
 
 # Compiler flags
 CFLAGS_ := -O2
@@ -97,12 +97,13 @@ else # Linux
 
 	CXX := g++
 	LDFLAGS := \
+		-L./ \
 		-L$(DELIGHT)/lib \
 		-L/lib/i686 \
 		-L$(XSIFTK_ROOT)/export/bin \
 		-L$(XSI_HOME)/Application/bin \
 		-L$(XSI_HOME)/Application/mainwin/mw/lib-linux_optimized \
-		-L/usr/lib \
+		-L/usr/lib32 \
 		-L$(BOOST)/$(BOOST_VER)/lib \
 		-lsicppsdk \
 		-lm -ldl -lc \
