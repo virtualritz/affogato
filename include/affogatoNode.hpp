@@ -132,7 +132,7 @@ namespace affogato {
 				nodeHub,
 				nodeNull,
 				nodeSphere
-			} node::type;
+			} type;
 
 			string name;
 			string fileName;
