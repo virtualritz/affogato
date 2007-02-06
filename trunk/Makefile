@@ -2,10 +2,10 @@
 
 OS := `uname -o`
 AFFOGATOVERSION := `tr -d \"\\"\\"\" < src/affogato.version`
-XSI_HOME := /rsp/apps/3d/xsi/Linux/XSI_5.11_QFE9
-XSI_BINDIR := $(XSI_HOME)/Application/bin
-XSISDK_ROOT := $(XSI_HOME)/XSISDK
-XSI_INCLUDE := $(XSISDK_ROOT)/include
+#XSI_HOME := /rsp/apps/3d/xsi/Linux/XSI_5.11_QFE9
+#XSI_BINDIR := $(XSI_HOME)/Application/bin
+#XSISDK_ROOT := $(XSI_HOME)/XSISDK
+#XSI_INCLUDE := $(XSISDK_ROOT)/include
 
 BOOST := /rsp/lib/boost/
 BOOST_VER := 1.32.0-r4
@@ -128,17 +128,17 @@ endif # ifeq "$(OSTYPE)" "linux-gnu"
 $(OBJ.dir)%.o: $(SRCDIR)%.c
 	@echo $@
 	-@if [ ! -d "$(OBJ.dir)" ]; then mkdir -p "$(OBJ.dir)"; fi
-	$(CC) -c $(CFLAGS) $(DEFINES) $< -o $@
+	$(CC) -m32 -c $(CFLAGS) $(DEFINES) $< -o $@
 
 $(OBJ.dir)%.o: $(SRCDIR)%.cpp
 	@echo $@
 	@if [ ! -d "$(OBJ.dir)" ]; then mkdir -p "$(OBJ.dir)"; fi
-	$(CXX) -c $(CFLAGS) $(DEFINES) $< -o $@
+	$(CXX) -m32 -c $(CFLAGS) $(DEFINES) $< -o $@
 
 affogato.so: $(OBJ) $(CPPOBJ)
 	@echo ________________________________________________________________________________
 	@echo Creating $(BINDIR)affogato-$(AFFOGATOVERSION).so
-	@$(CXX) -shared $(CPPOBJ) $(OBJ) $(DEPLIBS) -o $(BINDIR)affogato-$(AFFOGATOVERSION).so $(LDFLAGS)
+	@$(CXX) -m32 -shared $(CPPOBJ) $(OBJ) $(DEPLIBS) -o $(BINDIR)affogato-$(AFFOGATOVERSION).so $(LDFLAGS)
 	@strip --strip-all $(BINDIR)affogato-$(AFFOGATOVERSION).so
 
 depend:
