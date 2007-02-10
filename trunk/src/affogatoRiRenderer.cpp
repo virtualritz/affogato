@@ -1323,7 +1323,7 @@ namespace ueberMan {
 		boost::shared_array< RtToken > tokens;
 		boost::shared_array< RtPointer > values;
 		vector< tokenValue::parameterType > valueTypes( currentState->tokenValueCache.size() );
-		unsigned numParams = currentState->fillPrimitiveTokenValueArrays( tokens, values, valueTypes );
+		unsigned numParams( currentState->fillPrimitiveTokenValueArrays( tokens, values, valueTypes ) );
 
 		debugMessage( L"UeberManRi: Curves" );
 		RiCurvesV( type, ncurves, const_cast< int* >( &numVertsPerCurve[ 0 ] ), closed ? RI_PERIODIC : RI_NONPERIODIC, numParams, tokens.get(), values.get() );
@@ -1351,7 +1351,7 @@ namespace ueberMan {
 
 		// If an implementation doesn't support RiNuCurves (e.g. PRMan),
 		// we have to 'convert'/approximate our NuCurves with cubic curves here
-		// I leave this as an exercise to you, the inclined hacker reading this
+		// I leave this as an exercise to you, the inclined hacker, reading this.
 		// I'm in the lucky situation to use 3Delight as I'm writing this, so no
 		// need... :)
 

@@ -23,7 +23,7 @@
 #
 # Todo: make this a 'true' OO program, aka: create a 'jobChef' class that cooks
 #       commands. Maintain global parameters in another class that can be
-#       questioned about their values to avoid the use of global variables.
+#       queried about their values to avoid the use of global variables.
 #
 # #############################################################################
 

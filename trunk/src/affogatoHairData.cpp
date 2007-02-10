@@ -143,7 +143,7 @@ namespace affogato {
 			rha.Next();
 		} else {
 			rha = theHairPrimitive.GetRenderHairAccessor( numHairs, CURVE_DATA_CHUNK_SIZE, theTime );
-			numChunks = ( ( rha.GetRequestedHairCount() * 10 / CURVE_DATA_CHUNK_SIZE ) + 10 ) / 10;
+			numChunks = ( ( rha.GetRequestedHairCount() * 10. / CURVE_DATA_CHUNK_SIZE ) + 10. ) / 10.;
 		}
 
 		/*if( rha.GetUVCount() ) { // We have UV sets -- search for a displacement texture
@@ -193,6 +193,7 @@ namespace affogato {
 			theRenderer.parameter( **it );
 		}
 		debugMessage( L"Writing curves" );
+
 		theRenderer.curves( "b-spline", ncurves, nvertspercurve, false, const_cast< string& >( identifier ) );
 		debugMessage( L"Done writing curves" );
 	}
@@ -214,7 +215,8 @@ namespace affogato {
 			rha.Reset();
 		}
 
-		theRenderer.curves( "b-spline", ncurves, nvertspercurve, false, identifier );
+		theRenderer.translate( 0, 0, 0 );
+		//theRenderer.curves( "b-spline", ncurves, nvertspercurve, false, identifier );
 
 		return finished;
 	}
@@ -226,6 +228,7 @@ namespace affogato {
 
 		debugMessage( L"Getting Data!" );
 
+
 		long nChunkSize = rha.GetRequestedChunkSize();
 		debugMessage( L"Hair chunk size: " + CValue( nChunkSize ).GetAsText() );
 		long nReqHairCount = rha.GetRequestedHairCount();
@@ -234,6 +237,7 @@ namespace affogato {
 		debugMessage( L"Chunk hair count: " + CValue( nHairCount ).GetAsText() );
 		long nUVs = rha.GetUVCount();
 		debugMessage( L"Hair UV set count: " + CValue( nUVs ).GetAsText() );
+
 
 		// get the number of vertices for each render hair
 		// note: this array is used for iterating over the render hair position
@@ -248,11 +252,12 @@ namespace affogato {
 		// Number of vertixes per curve in the current chunk
 		nvertspercurve.reserve( ncurves );
 
-		long size = 0;
-		for( long curve = 0; curve < ncurves; curve++ ) {
-			nvertspercurve[ curve ] = verticesCountArray[ curve ] + 2; // We add tangents!
+		long size( 0 );
+		for( long curve( 0 ); curve < ncurves; curve++ ) {
+			nvertspercurve.push_back( verticesCountArray[ curve ] + 2 ); // We add tangents!
 			size += nvertspercurve[ curve ];
 		}
+
 
 		debugMessage( L"Getting hair positions" );
 		// get the render hair positions
@@ -263,12 +268,13 @@ namespace affogato {
 		boost::shared_ptr< float > vertices( new float[ size * 3 ], arrayDeleter() );
 		boost::shared_ptr< float > baseP( new float[ ncurves * 3 ], arrayDeleter() );
 
+
 		if( displacementMap.IsValid() && nUVs ) {
 			debugMessage( L"Displacing hair" );
 			CFloatArray uvVals;
 			rha.GetUVValues( 0, uvVals );
 
-			for( long loop = 0, index = 0, index2 = 0, origindex = 0; loop < ncurves / 1000; loop++ ) {
+			for( long loop( 0 ), index( 0 ), index2( 0 ), origindex( 0 ); loop < ncurves / 1000; loop++ ) {
 				Image displacementMap = clip.GetScaledDownImage( siImageRatio1x1 );
 				long start	= loop * 1000;
 				long end	= start + 1000;
@@ -393,7 +399,7 @@ namespace affogato {
 		int widthsize( size - 2 * ncurves );
 		boost::shared_ptr< float > widths( new float[ widthsize ], arrayDeleter() );
 
-		for( long curve = 0, index = 0; curve < ncurves; curve++ ) {
+		for( long curve( 0 ), index( 0 ); curve < ncurves; curve++ ) {
 			for ( long vertex = 0; vertex < verticesCountArray[ curve ]; vertex++ ) {
 				widths.get()[ index ] = widthScale * 2 * radVals[ index ];
 				index++;
@@ -427,7 +433,7 @@ namespace affogato {
 					uvs.get()[ index++ ] = 1 - uvVals[ uv + 1 ];
 				}
 
-				uvVals.Clear(); // Free memory before pushing data
+				uvVals.Clear(); // Free memory before pushing (and thus copying) data
 
 				string setname = CStringToString( rha.GetUVName( uvset ) );
 				if( "Texture_Projection" == setname ) // The default name gets translated to the RMan default name
@@ -450,6 +456,7 @@ namespace affogato {
 				ids.get()[ curve ] = ( float )curve;
 
 			debugMessage( L"Adding hair ID data" );
+
 
 			if( caching )
 				tokenValuePtrArray.push_back( tokenValue::tokenValuePtr( new tokenValue( ids, ncurves, "id", tokenValue::storageUniform ) ) );

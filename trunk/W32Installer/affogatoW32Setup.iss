@@ -8,11 +8,11 @@ AppUpdatesURL=http://sourceforge.net/projects/affogato
 DefaultDirName={pf}\Affogato
 DefaultGroupName=Affogato
 AppName=Affogato
-AppVersion=0.84.6
-AppVerName=Affogato 0.84.6 for Softimage XSI 6
-OutputBaseFileName=Affogato-0.84.6-Setup
+AppVersion=0.84.9
+AppVerName=Affogato 0.84.9 for Softimage XSI 6
+OutputBaseFileName=Affogato-0.84.9-Setup
 AllowNoIcons=true
-LicenseFile=../LICENSE.txt
+LicenseFile=LICENSE.rtf
 WizardImageFile=.\affogato.bmp
 WizardSmallImageFile=.\affogatosmall.bmp
 WizardImageBackColor=$FFFFFF
@@ -45,7 +45,7 @@ Name: "shaders"; Description: "Shaders"; Types: full custom
 [Files]
 Source: ..\LICENSE.txt; DestDir: {app}; Components: main
 ;Source: ..\README.txt; DestDir: {app}; Components: main
-;Source: ..\CHANGES.txt; DestDir: {app}; Components: main
+Source: ..\CHANGES.txt; DestDir: {app}; Components: main
 Source: ..\bin\affogato.dll; DestDir: {app}\bin; Components: main
 ;Source: ..\scripts\*.py; DestDir: {app}\scripts; Components: main
 ;Source: ..\python\*.py; DestDir: {app}\python; Components: main
@@ -83,7 +83,7 @@ Name: custom; Description: Custom Installation; Flags: iscustom
 
 [Run]
 Filename: "{app}\shaders\compile.cmd"; WorkingDir: "{app}\shaders"; Flags: runhidden shellexec waituntilidle skipifdoesntexist; Tasks: shaders
-;Filename: "{app}\CHANGES.txt"; Description: "View CHANGES.txt"; Flags: postinstall nowait shellexec skipifdoesntexist skipifsilent
+Filename: "{app}\CHANGES.txt"; Description: "View CHANGES.txt"; Flags: postinstall nowait shellexec skipifdoesntexist skipifsilent
 
 [UninstallDelete]
 Type: files; Name: {app}\Affogato.url

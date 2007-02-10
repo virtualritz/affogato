@@ -235,7 +235,7 @@ XSIPLUGINCALLBACK CStatus AffogatoHUB_PPGEvent( const CRef& inContext ) {
 			PPGLayout layout( prop.GetPPGLayout() );
 
 			layout.Clear();
-			layout.PutAttribute( siUIHelpFile, L"http://admin.rsp.com.au/rspwiki/index.php/Affogato_Render_Globals" );
+			layout.PutAttribute( siUIHelpFile, L"http://affogato.sf.net/" );
 
 			CValueArray tmpArray;
 
@@ -1303,7 +1303,7 @@ XSIPLUGINCALLBACK CStatus AffogatoGlobals_PPGEvent( const CRef& inContext ) {
 			PPGLayout layout( prop.GetPPGLayout() );
 
 			layout.Clear();
-			layout.PutAttribute( siUIHelpFile, L"http://admin.rsp.com.au/rspwiki/index.php/Affogato_Render_Globals" );
+			layout.PutAttribute( siUIHelpFile, L"http://affogato.sf.net/" );
 
 			CValueArray tmpArray;
 
@@ -1735,11 +1735,11 @@ XSIPLUGINCALLBACK CStatus AffogatoGlobals_PPGEvent( const CRef& inContext ) {
 								item = layout.AddItem( L"RayTracing", L"Enable Ray-Tracing" );
 								item.PutLabelMinPixels( LABEL_WIDTH );
 								updateAffogatoGlobalsState( prop, prop.GetParameters().GetItem( L"RayTracing" ) );
+								item = layout.AddItem( L"RayDepth" );
+								item.PutLabelMinPixels( LABEL_WIDTH );
 							layout.EndGroup();
 
 							layout.AddGroup( L"Trace", true );
-								item = layout.AddItem( L"RayDepth" );
-								item.PutLabelMinPixels( LABEL_WIDTH );
 								item = layout.AddItem( L"TraceBias", L"Bias" );
 								item.PutLabelMinPixels( LABEL_WIDTH );
 								item = layout.AddItem( L"TraceDisplacements", L"Displacements" );
@@ -1756,7 +1756,7 @@ XSIPLUGINCALLBACK CStatus AffogatoGlobals_PPGEvent( const CRef& inContext ) {
 							layout.AddGroup( L"Irradiance", true );
 								item = layout.AddItem( L"IrradianceSamples", L"Samples" );
 								item.PutLabelMinPixels( LABEL_WIDTH );
-								item = layout.AddItem( L"IrradianceShadingRate", L"ShadingRate" );
+								item = layout.AddItem( L"IrradianceShadingRate", L"Shading Rate" );
 								item.PutLabelMinPixels( LABEL_WIDTH );
 							layout.EndGroup();
 
@@ -1794,7 +1794,7 @@ XSIPLUGINCALLBACK CStatus AffogatoGlobals_PPGEvent( const CRef& inContext ) {
 
 								item = layout.AddItem( L"WriteBinaryData", L"Binary" );
 								item.PutLabelMinPixels( LABEL_WIDTH );
-								item = layout.AddItem( L"CompressData", L"Compress" );
+								item = layout.AddItem( L"CompressData", L"Compressed" );
 								item.PutLabelMinPixels( LABEL_WIDTH );
 #ifdef RSP
 								item = layout.AddItem( L"HubSupport" );
