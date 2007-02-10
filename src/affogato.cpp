@@ -228,7 +228,7 @@ XSIPLUGINCALLBACK CStatus AffogatoUpdateAllGlobals_Execute( const CRef &inContex
 
 		map< string, map< string, CValue > > globalParamsMap;
 
-		for( unsigned i = 0; i < ( unsigned )props.GetCount(); i++ ) {
+		for( unsigned i( 0 ); i < ( unsigned )props.GetCount(); i++ ) {
 			Property prop( props[ i ] );
 			CParameterRefArray params( prop.GetParameters() );
 			CString propName( prop.GetName() );
@@ -334,7 +334,7 @@ XSIPLUGINCALLBACK CStatus AffogatoRender_Execute( CRef &inContext) {
 	objects.Set( vals );
 
 	// Expand any models passed
-	for( unsigned i = 0; i < ( unsigned )vals.GetCount(); i++ ) {
+	for( unsigned i( 0 ); i < ( unsigned )vals.GetCount(); i++ ) {
 		CRef obj( vals[ i ] );
 		if( siModelID == obj.GetClassID() )
 				objects += Model( obj ).FindChildren ( L"*", CString(), CStringArray() );
@@ -372,7 +372,12 @@ XSIPLUGINCALLBACK CStatus AffogatoAbout_Execute( CRef &inContext) {
 	Application app;
 	UIToolkit kit( app.GetUIToolkit() );
 	long result;
-	kit.MsgBox( L"RSP Affogato Render Bridge\nVersion " + stringToCString( AFFOGATOVERSION ) + L"\nCopyright (c) 2005,2006 Rising Sun Pictures", siMsgOkOnly, L"About Affogato", result );
+	kit.MsgBox(
+		L"RSP Affogato Render Bridge\nVersion " + stringToCString( AFFOGATOVERSION ) + L"\n" +
+		L"\nInitial code by Moritz Moeller" +
+		L"\nContributors: Alan Jones, Dan Wills, Sam Hodge" +
+		L"\n\nCopyright (c) 2005, 2006 Rising Sun Pictures",
+		siMsgOkOnly, L"About Affogato", result );
 
 	return CStatus::OK;
 }
@@ -450,7 +455,7 @@ XSIPLUGINCALLBACK CStatus AffogatoExportArchive_Execute( const CRef &inContext) 
 		objects.Set( vals );
 
 		// Expand any models passed
-		for( unsigned i = 0; i < ( unsigned )vals.GetCount(); i++ ) {
+		for( unsigned i( 0 ); i < ( unsigned )vals.GetCount(); i++ ) {
 			CRef obj( vals[ i ] );
 			if( siModelID == obj.GetClassID() )
 					objects += Model( obj ).FindChildren ( L"*", CString(), CStringArray() );
@@ -490,7 +495,15 @@ XSIPLUGINCALLBACK CStatus AffogatoHelp_Init( const CRef &inContext ) {
 XSIPLUGINCALLBACK CStatus OnAffogatoHelpMenu( const CRef &inContext ) {
 	Application app;
 
+#ifdef _WIN32
+	execute( "http://affogato.sf.net/", "", ".", false );
+#else
+#ifdef RSP
 	execute( "need firefox && firefox", "http://admin.rsp.com.au/rspwiki/index.php/Affogato", ".", false );
+#else
+	execute( "firefox", "http://affogato.sf.net/", ".", false );
+#endif
+#endif
 
 	return CStatus::OK;
 }
@@ -535,7 +548,7 @@ XSIPLUGINCALLBACK CStatus AffogatoAttributes_Define( const CRef &inContext ) {
 
 	// Default capabilities for most of these parameters
 	int caps( siPersistable );
-	CValue dft ;	// Used for arguments we don't want to set
+	CValue dft; // Used for arguments we don't want to set
 
 	return CStatus::OK;
 }

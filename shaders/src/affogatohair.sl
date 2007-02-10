@@ -8,7 +8,7 @@ surface affogatohair(	float	Diffuse				= 1;
 {
     vector T = normalize( dPdv ); /* tangent along length of hair */
     vector V = -normalize( I );   /* V is the view vector */
-    color Cspec = 0, Cdiff = 0;  /* collect specular & diffuse light */
+    color Cspec = 0, Cdiff = 0;   /* collect specular & diffuse light */
     float cosang;
 
     /* Loop over lights, catch highlights as if this was a thin cylinder */
