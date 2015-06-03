@@ -1,0 +1,1 @@
+Affogato is a plugin for Autodesk's Softimage XSI 3D animation package. It links XSI with high-end 3D renderers. It allows a great level of customization to fit into contemporary VFX pipelines. Currently Affogato only supports RenderMan-compliant renderers.
